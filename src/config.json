@@ -1,0 +1,43 @@
+{
+  "authenticationEndpoint": "https://localhost:9445/",
+  "authenticationClientId": "k-chess",
+  "applicationId": "6da17920-38fa-4291-8254-be5500601da4",
+  "authenticationScope": "openid profile",
+  "fetchOpenIdConfigFromPoseidonNextAPI": false,
+  "authenticationExtraQueryParams": {
+    "resource": ""
+  },
+  "poseidonApiUrl": "https://localhost:9443/",
+  "customerApiUrl": "https://localhost:9446/",
+  "homeUrl": "/",
+  "userProfileUrl": "http://localhost:8080/poseidon-user-profile",
+  "entitlementsApiUrl": "https://localhost:9444",
+  "logging": {
+    "logLevel": 4,
+    "bufferingTime": 5000
+  },
+  "formatting": {
+    "dateFormat": "MMMM dd YYYY",
+    "timeFormat": "HH:mm:ss",
+    "formatDate": {
+      "long": "dddd, d MMMM yyyy",
+      "longForMoment": "dddd, D MMMM YYYY",
+      "short": "dd/MM/yyyy",
+      "shortForMoment": "DD/MM/YYYY"
+    },
+    "formatTime": {
+      "long": "HH:mm:ss",
+      "short": "HH:mm"
+    },
+    "formatNumber": {
+      "decimalSeparator": ".",
+      "groupSeparator": " ",
+      "decimalDigits": 2,
+      "decimalGorup": 3,
+      "leadingZeros": 1
+    }
+  },
+  "logoTooltip": "Poseidon Next",
+  "supportMenuItemHyperlink": "",
+  "showUserAdministration": true
+}

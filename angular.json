@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"ChessClient": {
+		"k-chess": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
@@ -17,7 +17,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/ChessClient",
+						"outputPath": "dist",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -26,19 +26,99 @@
 						"assets": [
 							"src/favicon.ico",
 							"src/assets",
+							"src/config.json",
+							"src/frame.html",
 							"src/manifest.webmanifest",
 							"src/robots.txt",
 							{
 								"glob": "**/*",
 								"input": "./node_modules/stockfish.js/",
 								"output": "./assets/stockfish.js/"
+							},
+							{
+								"glob": "app.manifest.json",
+								"input": "./",
+								"output": "./"
+							},
+							{
+								"glob": "**/*",
+								"input": "node_modules/@kognifai/design-system/styles/img/components/",
+								"output": "./assets/img/components/"
+							},
+							{
+								"glob": "**/*",
+								"input": "node_modules/@kognifai/design-system/styles/img/gfx/",
+								"output": "./assets/img/gfx/"
+							},
+							{
+								"glob": "**/*",
+								"input": "node_modules/@kognifai/design-system/styles/img/icons/",
+								"output": "./assets/img/icons/"
+							},
+							{
+								"glob": "ai.svg",
+								"input": "node_modules/@kognifai/design-system/styles/img/icons/general/",
+								"output": "./assets/images/"
+							},
+							{
+								"glob": "oidc-client.min.js",
+								"input": "../../node_modules/oidc-client/dist/",
+								"output": "./"
+							},
+							{
+								"glob": "oidc-client.min.js",
+								"input": "node_modules/oidc-client/dist/",
+								"output": "./"
+							},
+							{
+								"glob": "*.js",
+								"input": "../../node_modules/@kognifai/poseidon-authredirect/dist/",
+								"output": "./"
+							},
+							{
+								"glob": "*.js",
+								"input": "node_modules/@kognifai/poseidon-authredirect/dist/",
+								"output": "./"
+							},
+							{
+								"glob": "perform-authredirect.js",
+								"input": "src/scripts/",
+								"output": "./"
+							},
+							{
+								"glob": "perform-silentsignin.js",
+								"input": "src/scripts/",
+								"output": "./"
 							}
 						],
 						"styles": [
+							{
+								"input": "node_modules/@kognifai/design-system/styles/css/day-theme.css",
+								"lazy": true,
+								"bundleName": "kx-day-theme"
+							},
+							{
+								"input": "node_modules/@kognifai/design-system/styles/css/dusk-theme.css",
+								"lazy": true,
+								"bundleName": "kx-dusk-theme"
+							},
+							{
+								"input": "src/styles/app-day-theme.css",
+								"lazy": true,
+								"bundleName": "app-day-theme"
+							},
+							{
+								"input": "src/styles/app-dusk-theme.css",
+								"lazy": true,
+								"bundleName": "app-dusk-theme"
+							},
 							"src/styles.scss",
 							"node_modules/ngx-toastr/toastr.css"
 						],
-						"scripts": [],
+						"extractCss": true,
+						"scripts": [
+							"node_modules/@kognifai/design-system/styles/scripts/kx/navbar.js"
+						],
 						"stylePreprocessorOptions": {
 							"includePaths": [
 								"src/app/styles"
@@ -51,6 +131,14 @@
 								{
 									"replace": "src/environments/environment.ts",
 									"with": "src/environments/environment.prod.ts"
+								},
+								{
+									"replace": "app.manifest.json",
+									"with": "app.manifest.prod.json"
+								},
+								{
+									"replace": "src/config.json",
+									"with": "src/config.prod.json"
 								}
 							],
 							"optimization": true,
@@ -81,19 +169,19 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "ChessClient:build",
+						"browserTarget": "k-chess:build",
 						"port": 4301
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "ChessClient:build:production"
+							"browserTarget": "k-chess:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "ChessClient:build"
+						"browserTarget": "k-chess:build"
 					}
 				},
 				"test": {
@@ -136,16 +224,16 @@
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
 						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "ChessClient:serve"
+						"devServerTarget": "k-chess:serve"
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "ChessClient:serve:production"
+							"devServerTarget": "k-chess:serve:production"
 						}
 					}
 				}
 			}
 		}
 	},
-	"defaultProject": "ChessClient"
+	"defaultProject": "k-chess"
 }

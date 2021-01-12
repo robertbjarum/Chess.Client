@@ -8,7 +8,7 @@ import { UpdateService } from 'src/app/services/updates/update.service';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'ChessClient';
+	title = 'K-Chess';
 
 	constructor(updateService: UpdateService) {
 		updateService.checkForUpdates();

@@ -4,18 +4,29 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>ChessClient</title>
+		<title>Chess Client</title>
 		<base href="/">
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/x-icon" href="favicon.ico">
 		<link href="/assets/fontawesome/css/all.min.css" rel="stylesheet">
-		<link rel="manifest" href="manifest.webmanifest">
-		<meta name="theme-color" content="#1976d2">
+		<link rel="manifest" href="/pwa-assets/manifest.json">
 	</head>
 
-	<body>
+	<body class="kx-page" style="margin: 0; background-color: #b2b4b5;">
+		<script src="./oidc-client.min.js"></script>
+		<script src="./authredirect.js"></script>
+		<script src="./perform-authredirect.js"></script>
 		<app-root></app-root>
-		<noscript>Please enable JavaScript to continue using this application.</noscript>
+
+		<noscript>
+			<h2 style="color: red; text-align: center; margin-top: -50px;">
+			  <b>
+				<i>This website requires JavaScript.</i>
+			  </b>
+			</h2>
+		  </noscript>
+		  <script type="text/javascript" src="/pwa-assets/worker-registration.js"></script>
 	</body>
 
 </html>
