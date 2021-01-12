@@ -1,0 +1,9 @@
+{
+    "id": "6da17920-38fa-4291-8254-be5500601da4",
+    "name": "k-chess",
+    "url": "/k-chess/",
+    "oidcClientId": "k-chess",
+    "entitlements": [
+        { "id": "59c8634c-357a-44b9-bf85-f2ee5d370151", "name": "Access Application" }
+    ]
+}
