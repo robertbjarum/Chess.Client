@@ -6,6 +6,7 @@ import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 	styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnDestroy {
+	public title = 'K-Chess';
 	public shouldShowGameSettingsModal = false;
 
 	@ViewChild('container') public containerElement: ElementRef;

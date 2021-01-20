@@ -40,7 +40,6 @@ import { PageNotFoundModule } from '@kognifai/poseidon-ng-page-not-found-compone
 // Poseidon generated components
 import { AppSettingsComponent } from './app-settings/app-settings.component';
 import { MainComponent } from './main/main.component';
-import { HomeComponent } from './home/home.component';
 
 // Original Chess.Client Components
 import { BoardComponent } from './components/gameplay/board/board.component';
@@ -108,7 +107,6 @@ export function initConfig(config: ConfigurationService<IConfiguration>) {
 		AppComponent,
 		AppSettingsComponent,
 		MainComponent,
-		HomeComponent,
 		BoardComponent,
 		PieceComponent,
 		NavbarComponent,

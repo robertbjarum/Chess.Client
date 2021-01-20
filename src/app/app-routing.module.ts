@@ -8,7 +8,6 @@ import { OfflineGamePageComponent } from './pages/offline-game-page/offline-game
 import { ComputerGamePageComponent } from './pages/computer-game-page/computer-game-page.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { ApplicationsGuardService } from './applications-guard.service';
-import { HomeComponent } from './home/home.component';
 import { AppSettingsComponent } from './app-settings/app-settings.component';
 import { GlobalSettingsComponent } from '@kognifai/poseidon-ng-global-settings';
 import { UnauthorizedModule, UnauthorizedComponent } from '@kognifai/poseidon-ng-unauthorized-component';
@@ -22,7 +21,7 @@ const routes: Routes = [
 	  children: [
 		{ path: 'appsettings', component: AppSettingsComponent, pathMatch: 'full' },
 		{ path: 'globalsettings', component: GlobalSettingsComponent, pathMatch: 'full' },
-		{ path: '', component: HomeComponent, pathMatch: 'full' },
+		{ path: '', component: HomePageComponent, pathMatch: 'full' },
 		{ path: '**', component: PageNotFoundComponent }
 	  ]
 	}
