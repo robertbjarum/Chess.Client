@@ -21,20 +21,13 @@
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
-						"tsConfig": "tsconfig.app.json",
+						"tsConfig": "src/tsconfig.app.json",
 						"aot": true,
 						"assets": [
 							"src/favicon.ico",
 							"src/assets",
 							"src/config.json",
 							"src/frame.html",
-							"src/manifest.webmanifest",
-							"src/robots.txt",
-							{
-								"glob": "**/*",
-								"input": "./node_modules/stockfish.js/",
-								"output": "./assets/stockfish.js/"
-							},
 							{
 								"glob": "app.manifest.json",
 								"input": "./",
@@ -42,23 +35,8 @@
 							},
 							{
 								"glob": "**/*",
-								"input": "node_modules/@kognifai/design-system/styles/img/components/",
-								"output": "./assets/img/components/"
-							},
-							{
-								"glob": "**/*",
-								"input": "node_modules/@kognifai/design-system/styles/img/gfx/",
-								"output": "./assets/img/gfx/"
-							},
-							{
-								"glob": "**/*",
-								"input": "node_modules/@kognifai/design-system/styles/img/icons/",
+								"input": "node_modules/@kognifai/triton-design-system/dist/img/icons/",
 								"output": "./assets/img/icons/"
-							},
-							{
-								"glob": "ai.svg",
-								"input": "node_modules/@kognifai/design-system/styles/img/icons/general/",
-								"output": "./assets/images/"
 							},
 							{
 								"glob": "oidc-client.min.js",
@@ -89,36 +67,38 @@
 								"glob": "perform-silentsignin.js",
 								"input": "src/scripts/",
 								"output": "./"
+							},
+							{
+								"glob": "**/*",
+								"input": "./node_modules/stockfish.js/",
+								"output": "./assets/stockfish.js/"
 							}
 						],
 						"styles": [
 							{
-								"input": "node_modules/@kognifai/design-system/styles/css/day-theme.css",
-								"lazy": true,
+								"inject": false,
+								"input": "node_modules/@kognifai/triton-design-system/dist/css/day-theme.css",
 								"bundleName": "kx-day-theme"
 							},
 							{
-								"input": "node_modules/@kognifai/design-system/styles/css/dusk-theme.css",
-								"lazy": true,
+								"inject": false,
+								"input": "node_modules/@kognifai/triton-design-system/dist/css/dusk-theme.css",
 								"bundleName": "kx-dusk-theme"
 							},
 							{
+								"inject": false,
 								"input": "src/styles/app-day-theme.css",
-								"lazy": true,
 								"bundleName": "app-day-theme"
 							},
 							{
+								"inject": false,
 								"input": "src/styles/app-dusk-theme.css",
-								"lazy": true,
 								"bundleName": "app-dusk-theme"
 							},
 							"src/styles.scss",
-							"node_modules/ngx-toastr/toastr.css"
 						],
 						"extractCss": true,
-						"scripts": [
-							"node_modules/@kognifai/design-system/styles/scripts/kx/navbar.js"
-						],
+						"scripts": [],
 						"stylePreprocessorOptions": {
 							"includePaths": [
 								"src/app/styles"
@@ -127,6 +107,12 @@
 					},
 					"configurations": {
 						"production": {
+							"budgets": [
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb"
+								}
+							],
 							"fileReplacements": [
 								{
 									"replace": "src/environments/environment.ts",
@@ -146,23 +132,27 @@
 							"sourceMap": false,
 							"extractCss": true,
 							"namedChunks": false,
+							"aot": true,
 							"extractLicenses": true,
 							"vendorChunk": false,
 							"buildOptimizer": true,
+						},
+						"development": {
 							"budgets": [
 								{
-									"type": "initial",
-									"maximumWarning": "2mb",
-									"maximumError": "5mb"
-								},
-								{
 									"type": "anyComponentStyle",
-									"maximumWarning": "6kb",
-									"maximumError": "10kb"
+									"maximumWarning": "6kb"
 								}
 							],
-							"serviceWorker": true,
-							"ngswConfigPath": "ngsw-config.json"
+							"optimization": false,
+							"outputHashing": "all",
+							"sourceMap": true,
+							"extractCss": true,
+							"namedChunks": true,
+							"aot": false,
+							"extractLicenses": false,
+							"vendorChunk": true,
+							"buildOptimizer": false
 						}
 					}
 				},
@@ -176,7 +166,10 @@
 						"production": {
 							"browserTarget": "k-chess:build:production"
 						}
-					}
+					},
+					"development": {
+						"browserTarget": "k-chess:build:development"
+					 }
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
@@ -187,53 +180,56 @@
 				"test": {
 					"builder": "@angular-devkit/build-angular:karma",
 					"options": {
-						"main": "src/test.ts",
-						"polyfills": "src/polyfills.ts",
-						"tsConfig": "tsconfig.spec.json",
-						"karmaConfig": "karma.conf.js",
-						"assets": [
-							"src/favicon.ico",
-							"src/assets",
-							"src/manifest.webmanifest"
-						],
-						"styles": [
-							"src/styles.scss"
-						],
-						"scripts": [],
-						"stylePreprocessorOptions": {
-							"includePaths": [
-								"src/app/styles"
-							]
-						}
+					  "main": "src/test.ts",
+					  "polyfills": "src/polyfills.ts",
+					  "tsConfig": "src/tsconfig.spec.json",
+					  "karmaConfig": "src/karma.conf.js",
+					  "styles": [
+						"src/styles.css"
+					  ],
+					  "scripts": [],
+					  "assets": [
+						"src/favicon.ico",
+						"src/assets"
+					  ]
 					}
-				},
-				"lint": {
+				  },
+				  "lint": {
 					"builder": "@angular-devkit/build-angular:tslint",
 					"options": {
-						"tsConfig": [
-							"tsconfig.app.json",
-							"tsconfig.spec.json",
-							"e2e/tsconfig.json"
-						],
-						"exclude": [
-							"**/node_modules/**"
-						]
+					  "tsConfig": [
+						"src/tsconfig.app.json",
+						"src/tsconfig.spec.json"
+					  ],
+					  "exclude": [
+						"**/node_modules/**"
+					  ]
 					}
-				},
-				"e2e": {
+				  }
+				}
+			  },
+			  "k-chess-e2e": {
+				"root": "e2e/",
+				"projectType": "application",
+				"architect": {
+				  "e2e": {
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
-						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "k-chess:serve"
-					},
-					"configurations": {
-						"production": {
-							"devServerTarget": "k-chess:serve:production"
-						}
+					  "protractorConfig": "e2e/protractor.conf.js",
+					  "devServerTarget": "k-chess:serve"
 					}
+				  },
+				  "lint": {
+					"builder": "@angular-devkit/build-angular:tslint",
+					"options": {
+					  "tsConfig": "e2e/tsconfig.e2e.json",
+					  "exclude": [
+						"**/node_modules/**"
+					  ]
+					}
+				  }
 				}
-			}
-		}
-	},
-	"defaultProject": "k-chess"
+			  }
+			},
+			"defaultProject": "k-chess"
 }

@@ -1,13 +1,69 @@
-@import "./styles/themes/themes.scss";
-@import "./styles/themes/themify.scss";
+// @import "./styles/themes/themes.scss";
+// @import "./styles/themes/themify.scss";
 
-#background {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
+// #background {
+// 	display: flex;
+// 	flex-direction: column;
+// 	flex-grow: 1;
 
-	@include themify($themes) {
-		background-color: themed("pageBackgroundColor");
-		color: themed("primaryFontColor");
-	}
+// 	@include themify($themes) {
+// 		background-color: themed("pageBackgroundColor");
+// 		color: themed("primaryFontColor");
+// 	}
+// }
+
+/* TODO: add right sidebar component to Design System */
+.kx-sidebar-right {
+    background-color: #f6f6f6;
+    right: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+}
+.kx-sidebar-right.kx-is-active {
+    transform: scaleX(1);
+}
+
+.headerbar {
+    height: 3rem;
+}
+
+.sidebar_scroll {
+    z-index: 3;
+    overflow: visible;
+    border-radius: 0;
+}
+
+@media screen and (min-width: 48.0625em){
+    .kx-page__main {
+        height: calc(100vh - 3rem);
+    }
+}
+
+@media screen and (max-width: 768px){
+    .kx-page__main {
+        height: calc(100vh - 3rem);
+        min-height: 0% !important; 
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px){
+    .kx-page__main {
+        height: calc(100vh - 3rem);
+    }
+}
+
+.app-main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+  }
+
+.kx-page__main {
+    width: 100%;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    transition: width .1s ease-in-out;
+    overflow: auto;
+    margin-top: -0.75rem;
 }

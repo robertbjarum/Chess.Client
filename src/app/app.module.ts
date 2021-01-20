@@ -1,14 +1,11 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { ConfigService } from './services/config/config.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -32,6 +29,11 @@ import { SidebarsVisibilityService } from '@kognifai/poseidon-sidebar-visibility
 import { ToolsMenuModule } from '@kognifai/poseidon-toolsmenu';
 import { GlobalSettingsModule } from '@kognifai/poseidon-ng-global-settings';
 import { LoadingComponentModule } from '@kognifai/poseidon-ng-loading-component';
+
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ApplicationsGuardService } from './applications-guard.service';
+
 import { NavigationSubitemsService } from '@kognifai/poseidon-ng-navigation-subitems-service';
 import { PageNotFoundModule } from '@kognifai/poseidon-ng-page-not-found-component';
 
@@ -69,11 +71,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ApplicationsGuardService } from './applications-guard.service';
 
 export function initConfig(config: ConfigurationService<IConfiguration>) {
 	return () => config.load();
-}
+ }
 
 @NgModule({
 	imports: [
@@ -89,8 +90,8 @@ export function initConfig(config: ConfigurationService<IConfiguration>) {
 		GlobalSettingsModule,
 		LoadingComponentModule,
 		PageNotFoundModule,
-		CommonModule,
 		AppRoutingModule,
+		CommonModule,				// Chess.Client
 		ToastrModule.forRoot({
 			progressBar: true,
 			closeButton: true,
@@ -129,6 +130,7 @@ export function initConfig(config: ConfigurationService<IConfiguration>) {
 		ComputerGamePageComponent,
 		UserSettingsComponent
 	],
+	entryComponents: [ ],
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,
@@ -138,7 +140,7 @@ export function initConfig(config: ConfigurationService<IConfiguration>) {
 			provide: APP_INITIALIZER,
 			useFactory: initConfig, 
 			multi: true,
-			deps: [ConfigService]
+			deps: [ConfigurationService]
 		},
 		AppLocationsService,
 		ApplicationsGuardService,

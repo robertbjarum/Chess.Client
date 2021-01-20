@@ -1,0 +1,9 @@
+{
+  "name": "k-chess",
+  "version": "0.1.0",
+  "description": "k-chess application package",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "Robert Bjarum",
+  "scripts": {
+  }
+}

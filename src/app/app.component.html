@@ -1,3 +1,17 @@
+<app-loading *ngIf="initializing"></app-loading>
+
+<app-header *ngIf="!initializing" class="kx-page__header kx-flex headerbar"></app-header>
+
+<div class="app-main-content">
+  <app-sidebar *ngIf="!initializing" class="sidebar_scroll"></app-sidebar>
+  <app-main *ngIf="!initializing" class="kx-page__main" [ngStyle]="{'height': navigationVisible ? '' : '100%'}"></app-main>
+</div>
+
+<app-tools-menu *ngIf="!initializing" class="kx-page__nav kx-is-hidden kx-sidebar-right" 
+  [ngClass]="{'kx-is-hidden': sidebarsVisibilityService.toolsPanelHidden, 'kx-is-active': sidebarsVisibilityService.toolsPanelActive}">
+</app-tools-menu>
+
+<!-- Chess.Client
 <main id="app-container" class="theme-light">
 	<div id="background">
 		<app-navbar></app-navbar>
@@ -5,3 +19,4 @@
 	</div>
 </main>
 <ngx-spinner></ngx-spinner>
+-->
