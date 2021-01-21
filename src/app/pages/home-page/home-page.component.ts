@@ -7,7 +7,7 @@ import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 })
 export class HomePageComponent implements OnDestroy {
 	public title = 'K-Chess';
-	public shouldShowGameSettingsModal = false;
+	public shouldShowSendChallengeModal: boolean = false;
 
 	@ViewChild('container') public containerElement: ElementRef;
 
@@ -15,11 +15,16 @@ export class HomePageComponent implements OnDestroy {
 		this.containerElement.nativeElement.remove();
 	}
 
-	public openGameSettingsModal(): void {
-		this.shouldShowGameSettingsModal = true;
+	public showSendChallengeModal(): void {
+		// if (!this.loginStateService.isLoggedIn()) {
+		// 	this.toastr.error('You must be logged in to send a challenge', 'Cannot send challenge');
+		// } else {
+		// 	this.shouldShowSendChallengeModal = true;
+		// }
 	}
 
-	public closeGameSettingsModal(): void {
-		this.shouldShowGameSettingsModal = false;
+	public hideSendChallengeModal(): void {
+		this.shouldShowSendChallengeModal = false;
 	}
 }
+

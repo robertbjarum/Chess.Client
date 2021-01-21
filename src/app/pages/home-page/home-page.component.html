@@ -1,14 +1,31 @@
 <div #container class="kx-container kx-container--tab-l kx-mx--auto kx-my--large">
 	<div class="kx-card kx-card--skin-default kx-p--base kx-p--large@tab-s">
-		<h1 class="kx-typescale--xxlarge kx-mb--medium">{{title}}</h1>
-		<button (click)="openGameSettingsModal()" class="kx-btn kx-btn--skin-primary kx-btn--size-large">
-			<span class="kx-btn__inner">
-				<span class="kx-btn__txt">Play</span>
-			</span>
-		</button>
+		<div class="kx-row kx-row--gutters-h kx-justify-content-center">
+			<h1 class="kx-typescale--xxlarge kx-mb--medium">{{title}}</h1>
+		</div>
+		<div class="kx-btngroup kx-flex kx-flex-wrap kx-btngroup--spacing  kx-justify-content-center" role="group"
+			aria-label="">
+			<!-- BUTTON Component -->
+			<button class="kx-btn kx-btn--skin-primary kx-btn--size-large">
+				<span class="kx-btn__inner">
+					<span class="kx-btn__txt" routerLink="offline-game">Play Alone</span>
+				</span>
+			</button>
+			<!-- BUTTON Component -->
+			<button class="kx-btn kx-btn--skin-primary kx-btn--size-large">
+				<span class="kx-btn__inner">
+					<span class="kx-btn__txt" routerLink="computer-game">Play the Computer</span>
+				</span>
+			</button>
+			<!-- BUTTON Component -->
+			<button class="kx-btn kx-btn--skin-primary kx-btn--size-large">
+				<span class="kx-btn__inner">
+					<span class="kx-btn__txt" (click)="showSendChallengeModal()">Challenge User</span>
+				</span>
+			</button>
 	</div>
 
-	<app-game-settings-modal [hidden]="!shouldShowGameSettingsModal" (onClose)="closeGameSettingsModal()">
-	</app-game-settings-modal>
+	<app-send-challenge-modal [hidden]="!shouldShowSendChallengeModal" (onClose)="hideSendChallengeModal()">
+	</app-send-challenge-modal>
 
 </div>

@@ -1,14 +1,63 @@
-<div class="modal-background">
-	<div class="modal-content">
-		<div class="close" (click)="close()"><i class="fas fa-times"></i></div>
-		<div class="title">Game Options</div>
-		<div class="options">
-			<button class="button" routerLink="offline-game">Play Alone</button>
-			<button class="button" routerLink="computer-game">Play the Computer</button>
-			<button class="button" (click)="showSendChallengeModal()">Challenge User</button>
+<div class="kx-modal" tabindex="1" role="dialog" aria-labelledby="--71431">
+	<div class="kx-modal__dialog kx-modal--skin-discreet kx-modal--size-medium" role="document">
+		<div class="kx-modal__content">
+			<div class="kx-modal__header">
+				<h5 class="kx-modal__title" id="--71431">Game Options</h5>
+				<!-- BUTTON Component -->
+				<button class="kx-btn kx-btn--size-base kx-btn--icon kx-modal__close" (click)="close()"
+					aria-label="Close">
+					<span class="kx-btn__inner">
+						<!-- ICON Component -->
+						<i class="kx-icon kx-icon--size-moderate">
+							<svg focusable="false">
+								<use xlink:href="../../assets/img/icons/sprites/icons.svg#close"></use>
+							</svg>
+						</i>
+						<span class="kx-btn__txt kx-is-vishidden">Close</span>
+					</span>
+				</button>
+			</div>
+			<div class="kx-modal__body">
+				<p>Choose what kind of Chess game to play.</p>
+				<div class="kx-btngroup kx-flex kx-flex-wrap kx-justify-content-center kx-btngroup--spacing"
+					role="group" aria-label="">
+					<!-- BUTTON Component -->
+					<button class="kx-btn kx-btn--skin-primary kx-btn--size-large">
+						<span class="kx-btn__inner">
+							<span class="kx-btn__txt" routerLink="offline-game">Play Alone</span>
+						</span>
+					</button>
+					<!-- BUTTON Component -->
+					<button class="kx-btn kx-btn--skin-primary kx-btn--size-large">
+						<span class="kx-btn__inner">
+							<span class="kx-btn__txt" routerLink="computer-game">Play the Computer</span>
+						</span>
+					</button>
+					<!-- BUTTON Component -->
+					<button class="kx-btn kx-btn--skin-primary kx-btn--size-large">
+						<span class="kx-btn__inner">
+							<span class="kx-btn__txt" (click)="showSendChallengeModal()">Challenge User</span>
+						</span>
+					</button>
+				</div>
+			</div>
+
+			<div class="kx-modal__footer">
+
+				<!-- BUTTON-GROUP Component -->
+				<div class="kx-btngroup kx-flex kx-flex-wrap kx-justify-content-center" role="group" aria-label="">
+					<!-- BUTTON Component -->
+					<button class="kx-btn kx-btn--skin-secondary kx-btn--size-large">
+						<span class="kx-btn__inner">
+							<span class="kx-btn__txt" (click)="close()">Cancel</span>
+						</span>
+					</button>
+				</div>
+			</div>
+
 		</div>
-		<button class="button" (click)="close()">Cancel</button>
 	</div>
+	<div class="kx-modal__backdrop"></div>
 </div>
 <app-send-challenge-modal [hidden]="!shouldShowSendChallengeModal" (onClose)="hideSendChallengeModal()">
 </app-send-challenge-modal>
