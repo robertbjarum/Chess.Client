@@ -1,12 +1,19 @@
-<div class="content">
-	<div class="game">
-		<app-board></app-board>
+<div class="kx-container kx-container--tab-m kx-mx--auto kx-my--large">
+	<div class="kx-row kx-row-gutters">
+		<div class="kx-col kx-col--12 kx-col--6@tab-m">
+			<app-board></app-board>
+		</div>
+		<div class="kx-col kx-col--12 kx-col--6@tab-m">
 
-		<div class="sidebar">
-			<div class="sidebar-title">
-				<div *ngIf="isWhiteActiveColor() && !isGameOver">White to play</div>
-				<div *ngIf="!isWhiteActiveColor() && !isGameOver">Black to play</div>
-				<div *ngIf="isGameOver">Game Over</div>
+		</div>
+		<div class="kx-col kx-col--12 kx-col--6@tab-m">
+			<div class="kx-notification kx-notification--info kx-flex kx-align-items-start kx-justify-content-start">
+				<div class="kx-notification__content kx-flex kx-flex-wrap kx-align-items-start">
+					<div class="kx-notification__body">
+						<div *ngIf="isWhiteActiveColor() && !isGameOver">White to play</div>
+						<div *ngIf="!isWhiteActiveColor() && !isGameOver">Black to play</div>
+						<div *ngIf="isGameOver">Game Over</div>					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -45,7 +45,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 				this.pieceMovementMethod = pieceMovementMethodResponse.data;
 			}
 		} catch {
-			console.error('Unable to retrieve user movement method prefference');
+			console.info('Unable to retrieve user movement method prefference');
 		}
 	}
 

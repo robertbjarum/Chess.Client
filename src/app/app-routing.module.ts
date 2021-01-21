@@ -21,9 +21,11 @@ const routes: Routes = [
 	  children: [
 		{ path: 'appsettings', component: AppSettingsComponent, pathMatch: 'full' },
 		{ path: 'globalsettings', component: GlobalSettingsComponent, pathMatch: 'full' },
+		{ path: 'offline-game', component: OfflineGamePageComponent },
+    	{ path: 'computer-game', component: ComputerGamePageComponent },
 		{ path: '', component: HomePageComponent, pathMatch: 'full' },
 		{ path: '**', component: PageNotFoundComponent }
-	  ]
+]
 	}
   ];
   
@@ -36,8 +38,6 @@ const routes: Routes = [
 // const routes: Routes = [
 // 	{ path: '', component: HomePageComponent },
 // 	{ path: 'game/:id', component: GamePageComponent },
-// 	{ path: 'offline-game', component: OfflineGamePageComponent },
-// 	{ path: 'computer-game', component: ComputerGamePageComponent },
 // 	{ path: 'create-account', component: CreateAccountPageComponent },
 // 	{ path: 'log-in', component: LogInComponent },
 // 	{ path: 'settings', component: UserSettingsComponent }
