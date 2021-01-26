@@ -1,17 +1,20 @@
-<div class="play-page-content">
-	<div class="game">
-		<app-board #board [settings]="boardSettings"></app-board>
-
-		<div class="sidebar">
-			<div class="sidebar-title">
-				<div *ngIf="isWhiteActiveColor() && !isGameOver">White to play</div>
-				<div *ngIf="!isWhiteActiveColor() && !isGameOver">Black to play</div>
-				<div *ngIf="isGameOver">Game Over</div>
-				<div>Stockfish {{getEngineState()}}</div>
-			</div>
-			<div class="sidebar-content">
-				<div>
-					<div>Computer Difficulty:</div>
+<div class="kx-container kx-container--tab-m kx-mx--auto kx-my--large">
+	<div class="kx-row kx-row-gutters">
+		<div class="kx-col kx-col--12 kx-col--8@tab-m">
+			<app-board #board [settings]="boardSettings"></app-board>
+		</div>
+		<div class="kx-col kx-col--12 kx-col--4@tab-m">
+			<div class="kx-card kx-card--skin-default">
+				<header class="kx-card__header">
+					<h3>
+						<p>Stockfish {{getEngineState()}}</p>
+						<div *ngIf="isWhiteActiveColor() && !isGameOver">White to play</div>
+						<div *ngIf="!isWhiteActiveColor() && !isGameOver">Black to play</div>
+						<div *ngIf="isGameOver">Game Over</div>
+					</h3>
+				</header>
+				<div class="kx-card_body">
+					<p>Computer Difficulty:</p>
 					<div class="difficulty-controls">
 						<mat-slider min="1" max="10" value="{{getDisplayedDifficulty()}}"
 							(input)="setDisplayedDifficulty($event.value)" (change)="setDifficulty($event.value)">
@@ -19,13 +22,15 @@
 						{{getDisplayedDifficulty()}}
 					</div>
 				</div>
-				<div>
-					<button class="button" (click)="switchSides()">Switch Sides</button>
-				</div>
+				<footer class="kx-card__footer">
+					<button class="kx-btn kx-btn--skin-flat kx-btn--size-medium" (click)="switchSides()">Switch
+						Sides</button>
+				</footer>
 			</div>
 		</div>
 	</div>
 </div>
+
 
 <app-game-over-modal [gameResult]="gameResult" [hidden]="!shouldShowGameOverModal" (onClose)="onCloseGameOverModal()">
 </app-game-over-modal>

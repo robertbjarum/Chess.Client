@@ -1,5 +1,4 @@
 <div #container class="kx-container kx-container--tab-l kx-mx--auto kx-my--large">
-	<div class="kx-card kx-card--skin-default kx-p--base kx-p--large@tab-s">
 		<div class="kx-row kx-row--gutters-h kx-justify-content-center">
 			<h1 class="kx-typescale--xxlarge kx-mb--medium">{{title}}</h1>
 		</div>
@@ -23,9 +22,9 @@
 					<span class="kx-btn__txt" (click)="showSendChallengeModal()">Challenge User</span>
 				</span>
 			</button>
-	</div>
+		</div>
 
-	<app-send-challenge-modal [hidden]="!shouldShowSendChallengeModal" (onClose)="hideSendChallengeModal()">
-	</app-send-challenge-modal>
+		<app-send-challenge-modal [hidden]="!shouldShowSendChallengeModal" (onClose)="hideSendChallengeModal()">
+		</app-send-challenge-modal>
 
 </div>

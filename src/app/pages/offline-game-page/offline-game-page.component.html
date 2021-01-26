@@ -1,21 +1,26 @@
 <div class="kx-container kx-container--tab-m kx-mx--auto kx-my--large">
-	<div class="kx-row kx-row-gutters">
-		<div class="kx-col kx-col--12 kx-col--6@tab-m">
-			<app-board></app-board>
+	<div class="kx-row kx-row--gutters-h kx-justify-content-center">
+		<div class="kx-col kx-col--12">
+			<h1 class="kx-typescale--xxlarge kx-mb--medium">{{title}}</h1>
 		</div>
-		<div class="kx-col kx-col--12 kx-col--6@tab-m">
-
-		</div>
-		<div class="kx-col kx-col--12 kx-col--6@tab-m">
-			<div class="kx-notification kx-notification--info kx-flex kx-align-items-start kx-justify-content-start">
-				<div class="kx-notification__content kx-flex kx-flex-wrap kx-align-items-start">
+	</div>
+	<div class="kx-row kx-row--gutters-h">
+		<div class="kx-col kx-col--12  kx-col--8@tab-m">
+			<div class="kx-notification kx-notification--block kx-mb--large"
+				*ngIf="notificationText || notificationTitle" [ngClass]="notificationClass">
+				<div class="kx-notification__content">
+					<header class="kx-notification__header">
+						<h3 class="kx-notification__title">{{notificationTitle}}</h3>
+					</header>
 					<div class="kx-notification__body">
-						<div *ngIf="isWhiteActiveColor() && !isGameOver">White to play</div>
-						<div *ngIf="!isWhiteActiveColor() && !isGameOver">Black to play</div>
-						<div *ngIf="isGameOver">Game Over</div>					</div>
+						<p>{{notificationText}}</p>
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="kx-col kx-col--12 kx-col--8@tab-m">
+		<app-board></app-board>
 	</div>
 </div>
 

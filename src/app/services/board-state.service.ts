@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EAGAIN } from 'constants';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { BoardState } from '../classes/board-state';
 import { GameResult } from '../classes/game-result';
 import { Move } from '../classes/move';
@@ -23,6 +24,9 @@ export class BoardStateService {
 	private onlineMoveSubscribers: ((move: Move) => void)[] = [];
 	private playerMoveSubscribers: ((move: Move) => void)[] = [];
 	private gameEndSubscribers: ((gameResult: GameResult) => void)[] = [];
+
+	private activePlayer = new BehaviorSubject<PlayerColor>(PlayerColor.White);
+	private activePlayer$ = this.activePlayer.asObservable();
 
 	constructor(private fenParserService: FenParserService, private router: Router) {
 		this.setBoardToStandardStartingPosition();
@@ -47,6 +51,7 @@ export class BoardStateService {
 
 	public setPlayerColor(color: PlayerColor): void {
 		this.playerColor = color;
+		console.log("board-state.service::setPlayerColor: " + color);
 	}
 
 	public getPieceOnSquare(x: number, y: number): Piece {
@@ -55,6 +60,10 @@ export class BoardStateService {
 
 	public getBoardState(): BoardState {
 		return this.boardState;
+	}
+
+	public getActivePlayerObservable(): Observable<PlayerColor> {
+		return this.activePlayer$;
 	}
 
 	public getPiecePositions(): Piece[][] {
@@ -522,6 +531,7 @@ export class BoardStateService {
 		}
 
 		this.boardState.activeColor = this.boardState.activeColor == PlayerColor.White ? PlayerColor.Black : PlayerColor.White;
+		this.activePlayer.next(this.boardState.activeColor);
 
 		if (moveValidationResult.shouldResetFiftyMoveRuleCounter) {
 			this.positionsSinceLastIrreversableMove = [];
