@@ -26,10 +26,10 @@ export class OfflineGamePageComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.getPlayerColor();
+		this.getActivePlayer();
 	}
 
-	getPlayerColor(): void {
+	getActivePlayer(): void {
 		this.boardStateService.getActivePlayerObservable()
 			.subscribe( playerColor =>  {
 				this.whiteToPlay = playerColor == PlayerColor.White;

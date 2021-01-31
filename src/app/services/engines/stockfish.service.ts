@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Move } from 'src/app/classes/move';
 import { CoordinateNotationParserService } from '../coordinate-notation-parser.service';
 
@@ -12,8 +13,11 @@ export class StockfishService {
 	private hasInitialisationStarted: boolean = false;
 	private hasLoaded: boolean = false;
 	private stockfish: Worker;
-	private state: string = "Loading";
 	private difficulty: number = 10;
+
+
+	private engineState = new BehaviorSubject<string>("Loading");
+	private engineState$ = this.engineState.asObservable();
 
 	private calculatingPromise: Promise<string> = null;
 	private calculatingPromiseResolutionCallback: (value: string | PromiseLike<string>) => void = null;
@@ -37,7 +41,11 @@ export class StockfishService {
 	}
 
 	public getState(): string {
-		return this.state;
+		return this.engineState.getValue();
+	}
+
+	public getEngineStateObservable(): Observable<string> {
+		return this.engineState$;
 	}
 
 	public async calculateMove(moves: Move[]): Promise<string> {
@@ -59,7 +67,7 @@ export class StockfishService {
 
 		this.stockfish.postMessage(positionMessage);
 		this.stockfish.postMessage(`go depth ${this.getCalculationDepth()}`);
-		this.state = "Thinking";
+		this.engineState.next("Thinking");
 
 		var calculatingPromise = new Promise<string>((resolve, reject) => {
 			this.calculatingPromiseResolutionCallback = resolve;
@@ -85,13 +93,13 @@ export class StockfishService {
 
 		if (data.includes('uciok')) {
 			this.hasLoaded = true;
-			this.state = "Ready";
+			this.engineState.next("Ready");
 		}
 
 		if (data.startsWith('bestmove')) {
 			var bestMove = data.split(' ')[1];
 			this.calculatingPromiseResolutionCallback(bestMove);
-			this.state = "Ready";
+			this.engineState.next("Ready");
 		}
 	}
 

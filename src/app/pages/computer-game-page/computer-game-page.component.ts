@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { combineLatest } from 'rxjs';
 import { BoardSettings } from 'src/app/classes/board-settings';
 import { GameResult } from 'src/app/classes/game-result';
 import { Move } from 'src/app/classes/move';
@@ -14,19 +15,27 @@ import { StockfishService } from 'src/app/services/engines/stockfish.service';
 	templateUrl: './computer-game-page.component.html',
 	styleUrls: ['./computer-game-page.component.scss']
 })
-export class ComputerGamePageComponent {
+export class ComputerGamePageComponent implements OnInit {
 
 	@ViewChild('board') board: BoardComponent;
 
+	public title: string = "Playing against Stockfish";
 	public isGameOver: boolean = false;
 	public shouldShowGameOverModal: boolean = false;
 	public gameResult: GameResult;
+	public notificationTitle = 'Welcome!';
+	public notificationText = '';
+	public notificationClass = 'kx-notification--success';
+
+	public whiteToPlay: boolean = true;
+	public engineState: string = "";
+
 	public boardSettings: BoardSettings = new BoardSettings({
 		type: BoardType.Game,
 		playerColor: PlayerColor.White
 	});
 
-	private displayedDifficulty: number = 10;
+	public  displayedDifficulty: number = 10;
 	private gameMoves: Move[] = [];
 
 	constructor(private stockfishService: StockfishService, private boardStateService: BoardStateService,
@@ -36,7 +45,31 @@ export class ComputerGamePageComponent {
 		this.boardStateService.subscribeToNonPlayerMoves(move => this.onOpponentMove(move));
 		this.boardStateService.subscribeToGameEnd((gameResult: GameResult) => this.onGameEnd(gameResult));
 		this.stockfishService.start();
+		this.updateStateVariables();
+	}
+
+	ngOnInit() {
 		this.displayedDifficulty = this.stockfishService.getDifficulty();
+	}
+
+	updateStateVariables(): void {
+		const o1 = this.boardStateService.getActivePlayerObservable();
+		const o2 = this.stockfishService.getEngineStateObservable();
+		const o3 = combineLatest([o1,o2]);
+		o3.subscribe(value => {
+			this.whiteToPlay = value[0] == PlayerColor.White;
+			this.engineState = value[1];
+			this.notificationTitle = '';
+			if (this.engineState == "Ready") {
+				if (this.whiteToPlay) {
+					this.notificationTitle += "White to play";
+				} else {
+					this.notificationTitle += "Black to play";
+				}
+			} else {
+				this.notificationTitle = "Stockfish is " + this.engineState;
+			}
+		});
 	}
 
 	public isWhiteActiveColor(): boolean {
@@ -47,16 +80,8 @@ export class ComputerGamePageComponent {
 		this.shouldShowGameOverModal = false;
 	}
 
-	public getEngineState(): string {
-		return this.stockfishService.getState();
-	}
-
 	public setDifficulty(difficulty: number): void {
 		this.stockfishService.setDifficulty(difficulty);
-	}
-
-	public getDisplayedDifficulty(): number {
-		return this.displayedDifficulty;
 	}
 
 	public setDisplayedDifficulty(difficulty: number): void {
@@ -64,12 +89,12 @@ export class ComputerGamePageComponent {
 	}
 
 	public async switchSides(): Promise<void> {
-		this.board.hideLegalMoves();
 
 		this.boardSettings.playerColor = this.boardSettings.playerColor == PlayerColor.White
 			? PlayerColor.Black
 			: PlayerColor.White;
 
+		this.board.hideLegalMoves();
 		this.boardStateService.setPlayerColor(this.boardSettings.playerColor);
 		this.board.flipBoard = this.boardSettings.playerColor == PlayerColor.Black;
 

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EAGAIN } from 'constants';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { BoardState } from '../classes/board-state';
 import { GameResult } from '../classes/game-result';
 import { Move } from '../classes/move';

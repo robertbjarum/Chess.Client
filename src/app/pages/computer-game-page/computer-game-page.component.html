@@ -1,36 +1,58 @@
 <div class="kx-container kx-container--tab-m kx-mx--auto kx-my--large">
-	<div class="kx-row kx-row-gutters">
+	<div class="kx-row kx-row--gutters-h kx-justify-content-center">
+		<div class="kx-col kx-col--12">
+			<h1 class="kx-typescale--xxlarge kx-mb--medium">{{title}}</h1>
+		</div>
+	</div>
+	<div class="kx-row kx-row--gutters-h">
+		<div class="kx-col kx-col--12">
+			<div class="kx-notification kx-notification--block kx-mb--large"
+				*ngIf="notificationText || notificationTitle" [ngClass]="notificationClass">
+				<div class="kx-notification__content">
+					<header class="kx-notification__header">
+						<h3 class="kx-notification__title">{{notificationTitle}}</h3>
+					</header>
+					<div class="kx-notification__body">
+						<p>{{notificationText}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="kx-col kx-col--12 kx-col--8@tab-m">
 			<app-board #board [settings]="boardSettings"></app-board>
 		</div>
 		<div class="kx-col kx-col--12 kx-col--4@tab-m">
 			<div class="kx-card kx-card--skin-default">
 				<header class="kx-card__header">
-					<h3>
-						<p>Stockfish {{getEngineState()}}</p>
-						<div *ngIf="isWhiteActiveColor() && !isGameOver">White to play</div>
-						<div *ngIf="!isWhiteActiveColor() && !isGameOver">Black to play</div>
-						<div *ngIf="isGameOver">Game Over</div>
-					</h3>
+					<h3 class="kx-card__title">Controls</h3>
 				</header>
-				<div class="kx-card_body">
-					<p>Computer Difficulty:</p>
-					<div class="difficulty-controls">
-						<mat-slider min="1" max="10" value="{{getDisplayedDifficulty()}}"
-							(input)="setDisplayedDifficulty($event.value)" (change)="setDifficulty($event.value)">
-						</mat-slider>
-						{{getDisplayedDifficulty()}}
+				<div class="kx-card__body">
+					<div class="kx-row  kx-row--gutters-v">
+						<div class="kx-col kx-col--7">
+							<label class="kx-label" for="difficulty">
+								<span>Computer Difficulty</span>
+							</label>
+						</div>
+						<div class="kx-col kx-col--3">
+								<span>{{displayedDifficulty}}</span>
+						</div>
+						<div class="kx-col kx-col--12">
+							<div class="kx-form__element">
+								<input class="kx-field kx-field--size-medium" id="difficulty" type="range" min="1"
+									max="10" value="{{displayedDifficulty}}"
+									(input)="setDisplayedDifficulty($event.target.value)"
+									(change)="setDifficulty($event.target.value)" />
+							</div>
+						</div>
+						<div class="kx-col kx-col--12">
+							<button class="kx-btn kx-btn--skin-primary kx-btn--size-base" (click)="switchSides()">
+								<span class="kx-btn__inner">
+									<span class="kx-btn__txt">Switch Sides</span>
+								</span>
+							</button>
+						</div>
 					</div>
 				</div>
-				<footer class="kx-card__footer">
-					<button class="kx-btn kx-btn--skin-flat kx-btn--size-medium" (click)="switchSides()">Switch
-						Sides</button>
-				</footer>
 			</div>
+
 		</div>
-	</div>
-</div>
-
-
-<app-game-over-modal [gameResult]="gameResult" [hidden]="!shouldShowGameOverModal" (onClose)="onCloseGameOverModal()">
-</app-game-over-modal>
